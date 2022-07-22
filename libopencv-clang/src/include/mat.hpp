@@ -17,4 +17,7 @@ void matAsNdimentionType(struct Mat* cv_m, int ndims, const int *sizes, int type
 void matFromColsRowsTypeAndData(struct Mat* cv_m, int rows, int cols, int type, void* data);
 void matAsNdimentionTypeAndData(struct Mat* cv_m, int ndims, const int *sizes, int type, void* data);
 
+void matFromSizeAndType(struct Mat* cv_m, struct Size* size, int type);
+
+
 #endif /* mat_h */

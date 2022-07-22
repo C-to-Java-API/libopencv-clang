@@ -12,7 +12,12 @@
 extern "C" {
 #endif
 
-#include "include/mat.h"
+// original content
+#include "opencv2/core/hal/interface.h"
+
+// C ports
+#include "include/mat.hpp"
+#include "include/size.hpp"
 
 #ifdef __cplusplus
 }

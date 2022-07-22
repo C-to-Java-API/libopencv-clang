@@ -6,6 +6,7 @@
 //
 
 #include "include/mat_type.h"
+#include "include/size_type.h"
 #include "include/export.hpp"
 
 #include "opencv2/core/mat.hpp"
@@ -84,4 +85,10 @@ void matAsCopy(const struct Mat* src, struct Mat* dest) {
         .dimentions = src->dimentions,
     };
     dest = &tmp;
+}
+
+void matFromSizeAndType(struct Mat* cv_m, struct Size* size, int type) {
+    auto s = cv::Size(size->width, size->height);
+    auto m = cv::Mat(s, type);
+    CV_MatToMat(m, *cv_m);
 }

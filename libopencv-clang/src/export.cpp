@@ -13,8 +13,17 @@ using namespace std;
 
 void CV_MatToMat(cv::Mat& image, Mat& exMat) {
     unsigned long size = image.total() * image.elemSize();
-    char * bytes = new char[size];
-    memcpy(bytes,image.data,size * sizeof(char));
+    uchar * bytes = new uchar[size];
+    memcpy(bytes,image.data,size * sizeof(uchar));
+
+    auto stepMat = (MatStep) {
+        .p = image.step.p,
+        .buf = {*image.step.buf}
+    };
+    auto sizeMat = (MatSize) {
+        .p = image.size.p
+    };
+    
     exMat = (Mat) {
         .data = bytes,
         .width = image.cols,
@@ -22,6 +31,11 @@ void CV_MatToMat(cv::Mat& image, Mat& exMat) {
         .channels = image.channels(),
         .dimentions = image.dims,
         .flags = image.flags,
+        .datastart = image.datastart,
+        .dataend = image.dataend,
+        .datalimit = image.datalimit,
+        .step = &stepMat,
+        .size = &sizeMat,
     };
 }
 

@@ -6,8 +6,12 @@ PROJECT_SRC_DIR = $(LIB)/src
 PROJECT_TEST_DIR = $(LIB)/tests
 PROJECT_INCLUDE_DIR = $(PROJECT_SRC_DIR)/include
 
+OPENCV_INCLUDES = $(shell pkg-config --cflags opencv4)
+OPENCV_LIBS = $(shell pkg-config --libs opencv4)
+
 CFLAGS = -std=c++11 -Wall -Werror -ferror-limit=1 -I$(PROJECT_SRC_DIR)
-CFLAGS += $(shell pkg-config --cflags --libs opencv4)
+CFLAGS += $(OPENCV_INCLUDES)
+CFLAGS += $(OPENCV_LIBS)
 
 BUILD_DIR = build
 UNAME_S = $(shell uname -s)
@@ -15,9 +19,11 @@ ARCH = $(shell uname -m)
 LIB_EXTENSION = so
 PLATFORM = linux
 VERSION = $(shell pkg-config --modversion opencv4)
+CSTDLIB_INCLUDE_DIR = /usr/include
 ifeq ($(UNAME_S),Darwin)
 	PLATFORM = macos
 	LIB_EXTENSION = dylib
+	CSTDLIB_INCLUDE_DIR = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include
 endif
 LIB_DEF = $(LIB).$(VERSION)
 LIBNAME = $(LIB_DEF).$(PLATFORM).$(ARCH).$(LIB_EXTENSION)
@@ -48,8 +54,21 @@ pre:
 lib: clean pre
 	$(CC) $(CFLAGS) -dynamiclib $(PROJECT_SRC_DIR)/*.cpp -o $(LIB_FILE) -current_version $(VERSION) -compatibility_version $(VERSION)
 
+stdlib-dump:
+	jextract --source -t clang.stdlib -I $(CSTDLIB_INCLUDE_DIR) --dump-includes $(dumpfile) $(CSTDLIB_INCLUDE_DIR)/stdlib.h
+
+libopencv-dump:
+	$(MAKE) libopencv-src package=dummy args='--dump-includes $(dumpfile)'
+
+libopencv-src:
+	jextract --source -t clang.opencv.$(package) -I $(CSTDLIB_INCLUDE_DIR) -I $(PROJECT_SRC_DIR) $(OPENCV_INCLUDES) --header-class-name $(package) --output $(JAVA_SOURCES_DIR) $(args) $(PROJECT_INCLUDE_DIR)/capi.h
+
 java-src:
-	jextract --source -t clang.opencv.$(package) -I $(PROJECT_SRC_DIR) --header-class-name $(package) --output $(JAVA_SOURCES_DIR) $(args) $(PROJECT_INCLUDE_DIR)/capi.h
+	$(MAKE) stdlib-dump dumpfile=stdlib_dump.txt
+	$(MAKE) libopencv-dump dumpfile=libopencv_dump.txt
+	python scripts/diff.py stdlib_dump.txt libopencv_dump.txt diff.txt
+	
+	$(MAKE) libopencv-src package=core args="@diff.txt"
 
 jar: java-src
 	mvn clean package $(MAVEN_FLAGS).$(package)
@@ -66,6 +85,7 @@ deploy-jar: pre
 	mvn $(MAVEN_DEPLOY_FLAGS)
 
 clean:
+	rm -fr *.txt
 	rm -fr $(BUILD_DIR)
 	mvn clean $(MAVEN_FLAGS)
 
