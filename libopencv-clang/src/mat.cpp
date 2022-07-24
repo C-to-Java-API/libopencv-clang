@@ -7,6 +7,7 @@
 
 #include "include/mat_type.h"
 #include "include/size_type.h"
+#include "include/range_type.h"
 #include "include/export.hpp"
 
 #include "opencv2/core/mat.hpp"
@@ -85,7 +86,7 @@ struct Mat matAsNdimentionTypeAndData(int ndims, const int *sizes, int type, voi
  Creates a copy of an OpenCV matrix
  The equivalent of cv::Mat(const cv::Mat copyOf)
  */
-struct Mat matAsCopy(struct Mat* src) {
+struct Mat matAsCopy(const struct Mat* src) {
     return {
         .data = src->data,
         .width = src->width,
@@ -107,4 +108,70 @@ struct Mat matFromSizeAndType(struct Size* size, int type) {
     auto m = cv::Mat(s, type);
     CV_MatToMat(m, cv_m);
     return cv_m;
+}
+
+
+//Mat_(const Mat_& m, const Range& rowRange, const Range& colRange=Range::all());
+struct Mat matFromRowRangeColRange(const struct Mat* src, const struct Range* rowRange, const struct Range* colRange) {
+    auto cv_rowRange = cv::Range();
+    cv_rowRange.start = rowRange->start;
+    cv_rowRange.end = rowRange->end;
+    
+    auto cv_colRange = cv::Range();
+    cv_colRange.start = colRange->start;
+    cv_colRange.end = colRange->end;
+    
+    cv::Mat m;
+    auto newSrc = matAsCopy(src);
+    matToCV_Mat(newSrc, m);
+    
+    auto newMat = cv::Mat(m, cv_rowRange, cv_colRange);
+    
+    struct Mat result;
+    CV_MatToMat(newMat, result);
+    
+    return result;
+}
+
+////! selects a submatrix
+//Mat_(const Mat_& m, const Rect& roi);
+struct Mat matFromRange(struct Mat* src, const struct Range* roi) {
+    auto cv_roi = cv::Range();
+    cv_roi.start = roi->start;
+    cv_roi.end = roi->end;
+
+    cv::Mat m;
+    matToCV_Mat(*src, m);
+    
+    auto newMat = cv::Mat(m, cv_roi);
+    
+    struct Mat result;
+    CV_MatToMat(newMat, result);
+    
+    return result;
+}
+
+////! selects a submatrix, n-dim version
+//Mat_(const Mat_& m, const Range* ranges);
+////! selects a submatrix, n-dim version
+//Mat_(const Mat_& m, const std::vector<Range>& ranges);
+struct Mat matFromRanges(struct Mat* src, const struct Range* ranges[]) {
+    auto dims = src->dimentions;
+    cv::Range rs[dims];
+
+    for(auto i = 0; i < dims; i++) {
+        auto cv_r = cv::Range();
+        cv_r.start = ranges[i]->start;
+        cv_r.end = ranges[i]->end;
+        rs[i] = cv_r;
+    }
+    
+    cv::Mat m;
+    matToCV_Mat(*src, m);
+    auto newMat = cv::Mat(m, rs);
+    
+    struct Mat result;
+    CV_MatToMat(newMat, result);
+    
+    return result;
 }

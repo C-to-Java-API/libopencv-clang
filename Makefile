@@ -98,3 +98,5 @@ test-suite:
 
 test: clean lib
 	$(MAKE) test-suite suite=$(PROJECT_TEST_DIR)/test_mat.cpp
+	$(MAKE) test-suite suite=$(PROJECT_TEST_DIR)/test_size.cpp
+	$(MAKE) test-suite suite=$(PROJECT_TEST_DIR)/test_range.cpp

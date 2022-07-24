@@ -7,6 +7,7 @@
 
 #include "include/mat_type.h"
 #include "include/size_type.h"
+#include "include/range_type.h"
 
 #include "include/mat.hpp"
 
@@ -30,6 +31,22 @@ int main(int argc, char* argv[]) {
     m4 = matFromColsRowsTypeAndData(rows, cols, CV_8UC3, m1.data);
     m5 = matAsNdimentionTypeAndData(2, dims, CV_8UC3, m1.data);
     m6 = matFromSizeAndType(&s, 0);
+    
+    auto rowRange = (Range) {
+        .start = 1,
+        .end = 10,
+    };
+    
+    auto colRange = (Range) {
+        .start = 1,
+        .end = 10,
+    };
+    
+    const Range* rs[2] = {&rowRange, &colRange};
+    
+    matFromRowRangeColRange(&m2, &rowRange, &colRange);
+    matFromRange(&m3, &rowRange);
+    matFromRanges(&m3, rs);
     
     puts("Done with test [mat].");
 }

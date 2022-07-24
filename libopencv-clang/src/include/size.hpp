@@ -14,6 +14,7 @@ int area(struct Size* s);
 bool empty(struct Size* s);
 double aspectRatio(struct Size* s);
 
-struct Size size(struct Size* src);
+struct Size size();
+struct Size sizeAsCopy(struct Size* src);
 
 #endif /* size_h */
