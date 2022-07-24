@@ -15,7 +15,7 @@
 #include <stdio.h>
 
 int main(int argc, char* argv[]) {
-    Mat m1, m2, m3, m4, m5;
+    Mat m1, m2, m3, m4, m5, m6;
     int cols = 100;
     int rows = 100;
     int dims[2] = {cols, rows};
@@ -24,12 +24,12 @@ int main(int argc, char* argv[]) {
         .width = cols,
     };
 
-    mat(&m1);
-    matFromColsRowsType(&m2, cols, rows, CV_8UC3);
-    matAsNdimentionType(&m3, 2, dims, CV_8UC3);
-    matFromColsRowsTypeAndData(&m4, rows, cols, CV_8UC3, m1.data);
-    matAsNdimentionTypeAndData(&m5, 2, dims, CV_8UC3, m1.data);
-    matFromSizeAndType(&m3, &s, 0);
+    m1 = mat();
+    m2 = matFromColsRowsType(cols, rows, CV_8UC3);
+    m3 = matAsNdimentionType(2, dims, CV_8UC3);
+    m4 = matFromColsRowsTypeAndData(rows, cols, CV_8UC3, m1.data);
+    m5 = matAsNdimentionTypeAndData(2, dims, CV_8UC3, m1.data);
+    m6 = matFromSizeAndType(&s, 0);
     
     puts("Done with test [mat].");
 }

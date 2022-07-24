@@ -16,9 +16,11 @@
 */
 
 // Creates the default OpenCV matrix, the equivalent of cv::Mat()
-void mat(struct Mat* cv_m) {
+struct Mat mat() {
+    Mat cv_m;
     auto m = cv::Mat();
-    CV_MatToMat(m, *cv_m);
+    CV_MatToMat(m, cv_m);
+    return cv_m;
 }
 
 /*
@@ -28,9 +30,11 @@ void mat(struct Mat* cv_m) {
  - type.
  The equivalent of cv::Mat(int rows, int cols, int type)
  */
-void matFromColsRowsType(struct Mat* cv_m, int rows, int cols, int type) {
+struct Mat matFromColsRowsType(int rows, int cols, int type) {
+    Mat cv_m;
     auto m = cv::Mat(rows, cols, type);
-    CV_MatToMat(m, *cv_m);
+    CV_MatToMat(m, cv_m);
+    return cv_m;
 }
 
 /*
@@ -41,9 +45,11 @@ void matFromColsRowsType(struct Mat* cv_m, int rows, int cols, int type) {
  - data.
  The equivalent of cv::Mat(int rows, int cols, int type, void* data)
  */
-void matFromColsRowsTypeAndData(struct Mat* cv_m, int rows, int cols, int type, void* data) {
+struct Mat matFromColsRowsTypeAndData(int rows, int cols, int type, void* data) {
+    Mat cv_m;
     auto m = cv::Mat(rows, cols, type, data);
-    CV_MatToMat(m, *cv_m);
+    CV_MatToMat(m, cv_m);
+    return cv_m;
 }
 
 /*
@@ -53,9 +59,11 @@ void matFromColsRowsTypeAndData(struct Mat* cv_m, int rows, int cols, int type, 
  - type.
  The equivalent of cv::Mat(int ndims, const int *sizes, int type)
  */
-void matAsNdimentionType(struct Mat* cv_m, int ndims, const int *sizes, int type) {
+struct Mat matAsNdimentionType(int ndims, const int *sizes, int type) {
+    Mat cv_m;
     auto m = cv::Mat(ndims, sizes, type);
-    CV_MatToMat(m, *cv_m);
+    CV_MatToMat(m, cv_m);
+    return cv_m;
 }
 
 /*
@@ -66,29 +74,37 @@ void matAsNdimentionType(struct Mat* cv_m, int ndims, const int *sizes, int type
  - data.
  The equivalent of cv::Mat(int ndims, const int *sizes, int type, void* data)
  */
-void matAsNdimentionTypeAndData(struct Mat* cv_m, int ndims, const int *sizes, int type, void* data) {
+struct Mat matAsNdimentionTypeAndData(int ndims, const int *sizes, int type, void* data) {
+    Mat cv_m;
     auto m = cv::Mat(ndims, sizes, type, data);
-    CV_MatToMat(m, *cv_m);
+    CV_MatToMat(m, cv_m);
+    return cv_m;
 }
 
 /*
  Creates a copy of an OpenCV matrix
  The equivalent of cv::Mat(const cv::Mat copyOf)
  */
-void matAsCopy(const struct Mat* src, struct Mat* dest) {
-    struct Mat tmp = {
+struct Mat matAsCopy(struct Mat* src) {
+    return {
         .data = src->data,
         .width = src->width,
         .height = src->height,
         .channels = src->channels,
         .flags = src->flags,
         .dimentions = src->dimentions,
+        .datastart = src->datastart,
+        .dataend = src->dataend,
+        .datalimit = src->datalimit,
+        .step = src->step,
+        .size = src->size,
     };
-    dest = &tmp;
 }
 
-void matFromSizeAndType(struct Mat* cv_m, struct Size* size, int type) {
+struct Mat matFromSizeAndType(struct Size* size, int type) {
+    Mat cv_m;
     auto s = cv::Size(size->width, size->height);
     auto m = cv::Mat(s, type);
-    CV_MatToMat(m, *cv_m);
+    CV_MatToMat(m, cv_m);
+    return cv_m;
 }

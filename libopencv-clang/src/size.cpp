@@ -10,26 +10,22 @@
 #include "opencv2/core/mat.hpp"
 
 
-int area(Size& s) {
-    return cv::Size(s.width, s.height).area();
+int area(struct Size* s) {
+    return cv::Size(s->width, s->height).area();
 }
 
-bool empty(Size& s) {
-    return cv::Size(s.width, s.height).empty();
+bool empty(struct Size* s) {
+    return cv::Size(s->width, s->height).empty();
 }
 
-double aspectRatio(Size& s) {
-    return cv::Size(s.width, s.height).aspectRatio();
+double aspectRatio(struct Size* s) {
+    return cv::Size(s->width, s->height).aspectRatio();
 }
 
-int size(Size& src, Size& dst) {
-    auto intermediate = cv::Size(src.width, src.height);
-    if (intermediate.empty()) {
-        return -1;
-    }
-    dst = {
-      .width = src.width,
-      .height = src.height
+struct Size size(struct Size* src) {
+    auto intermediate = cv::Size(src->width, src->height);
+    return {
+      .width = intermediate.width,
+      .height = intermediate.height
     };
-    return 0;
 }

@@ -10,14 +10,13 @@
 
 #include "include/mat_type.h"
 
-void mat(struct Mat* cv_m);
-void matAsCopy(struct Mat* src, struct Mat* dest);
-void matFromColsRowsType(struct Mat* cv_m, int rows, int cols, int type);
-void matAsNdimentionType(struct Mat* cv_m, int ndims, const int *sizes, int type);
-void matFromColsRowsTypeAndData(struct Mat* cv_m, int rows, int cols, int type, void* data);
-void matAsNdimentionTypeAndData(struct Mat* cv_m, int ndims, const int *sizes, int type, void* data);
+struct Mat mat();
+struct Mat matAsCopy(struct Mat* src, struct Mat* dest);
+struct Mat matFromColsRowsType(int rows, int cols, int type);
+struct Mat matAsNdimentionType(int ndims, const int *sizes, int type);
+struct Mat matFromColsRowsTypeAndData(int rows, int cols, int type, void* data);
+struct Mat matAsNdimentionTypeAndData(int ndims, const int *sizes, int type, void* data);
 
-void matFromSizeAndType(struct Mat* cv_m, struct Size* size, int type);
-
+struct Mat matFromSizeAndType(struct Size* size, int type);
 
 #endif /* mat_h */
