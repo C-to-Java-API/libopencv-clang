@@ -130,3 +130,7 @@ jobs:
           brew install pkg-config
           brew link opencv
           pkg-config --modversion opencv4
+      - name: tests
+        shell: bash
+        run: |
+          make test
