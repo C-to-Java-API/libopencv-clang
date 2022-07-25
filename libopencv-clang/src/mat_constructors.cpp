@@ -110,16 +110,10 @@ struct Mat matFromSizeAndType(struct Size* size, int type) {
     return cv_m;
 }
 
-
 //Mat_(const Mat_& m, const Range& rowRange, const Range& colRange=Range::all());
 struct Mat matFromRowRangeColRange(const struct Mat* src, const struct Range* rowRange, const struct Range* colRange) {
-    auto cv_rowRange = cv::Range();
-    cv_rowRange.start = rowRange->start;
-    cv_rowRange.end = rowRange->end;
-    
-    auto cv_colRange = cv::Range();
-    cv_colRange.start = colRange->start;
-    cv_colRange.end = colRange->end;
+    auto cv_rowRange = cv::Range(rowRange->start, rowRange->end);
+    auto cv_colRange = cv::Range(colRange->start, colRange->end);
     
     cv::Mat m;
     auto newSrc = matAsCopy(src);
@@ -136,9 +130,7 @@ struct Mat matFromRowRangeColRange(const struct Mat* src, const struct Range* ro
 ////! selects a submatrix
 //Mat_(const Mat_& m, const Rect& roi);
 struct Mat matFromRange(struct Mat* src, const struct Range* roi) {
-    auto cv_roi = cv::Range();
-    cv_roi.start = roi->start;
-    cv_roi.end = roi->end;
+    auto cv_roi = cv::Range(roi->start, roi->end);
 
     cv::Mat m;
     matToCV_Mat(*src, m);
@@ -160,10 +152,7 @@ struct Mat matFromRanges(struct Mat* src, const struct Range* ranges[]) {
     cv::Range rs[dims];
 
     for(auto i = 0; i < dims; i++) {
-        auto cv_r = cv::Range();
-        cv_r.start = ranges[i]->start;
-        cv_r.end = ranges[i]->end;
-        rs[i] = cv_r;
+        rs[i] = cv::Range(ranges[i]->start, ranges[i]->end);
     }
     
     cv::Mat m;
