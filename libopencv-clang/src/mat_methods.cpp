@@ -7,6 +7,7 @@
 
 #include "include/mat_type.h"
 #include "include/size_type.h"
+#include "include/point_type.h"
 #include "include/range_type.h"
 #include "include/export.hpp"
 
@@ -258,4 +259,50 @@ int checkVector(struct Mat* src, int elemChannels, int depth, bool requireContin
         return m.checkVector(elemChannels, depth, requireContinuous);
     };
     return _intFunction(src, fn);
+}
+
+void locateROI(struct Mat* src, struct Size* wholeSize, struct Point* ofs) {
+    std::function<void(cv::Mat)> fn = [&](cv::Mat m) {
+        auto s = cv::Size(wholeSize->width, wholeSize->height);
+        auto p = cv::Point(ofs->x, ofs->y);
+        m.locateROI(s, p);
+    };
+    _voidFunction(src, fn);
+}
+
+struct Mat adjustROI(struct Mat* src, int dtop, int dbottom, int dleft, int dright) {
+    std::function<cv::Mat(cv::Mat)> fn = [&](cv::Mat m) {
+        return m.adjustROI(dtop, dbottom, dleft, dright);
+    };
+    return _matFunction(src, fn);
+}
+
+void deallocate(struct Mat* src) {
+    std::function<void(cv::Mat)> fn = [&](cv::Mat m) {
+        m.deallocate();
+    };
+    _voidFunction(src, fn);
+}
+
+void copySize(struct Mat* src, struct Mat* dst) {
+    std::function<void(cv::Mat)> fn = [&](cv::Mat m) {
+        cv::Mat cv_dst;
+        matToCV_Mat(*dst, cv_dst);
+        m.copySize(cv_dst);
+    };
+    _voidFunction(src, fn);
+}
+
+void reserve(struct Mat* src, size_t sz) {
+    std::function<void(cv::Mat)> fn = [&](cv::Mat m) {
+        m.reserve(sz);
+    };
+    _voidFunction(src, fn);
+}
+
+void reserveBuffer(struct Mat* src, size_t sz) {
+    std::function<void(cv::Mat)> fn = [&](cv::Mat m) {
+        m.reserveBuffer(sz);
+    };
+    _voidFunction(src, fn);
 }

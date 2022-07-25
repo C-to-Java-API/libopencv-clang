@@ -16,6 +16,8 @@
 		AA16DE3E288DD541002CA05D /* test_range.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE3D288DD541002CA05D /* test_range.cpp */; };
 		AA16DE40288DD555002CA05D /* test_size.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE3F288DD555002CA05D /* test_size.cpp */; };
 		AA16DE42288E7F44002CA05D /* mat_methods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE41288E7F44002CA05D /* mat_methods.cpp */; };
+		AA16DE49288EE59F002CA05D /* point.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE48288EE59F002CA05D /* point.cpp */; };
+		AA16DE4E288EEC83002CA05D /* rect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE4D288EEC83002CA05D /* rect.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +56,12 @@
 		AA16DE3D288DD541002CA05D /* test_range.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test_range.cpp; sourceTree = "<group>"; };
 		AA16DE3F288DD555002CA05D /* test_size.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test_size.cpp; sourceTree = "<group>"; };
 		AA16DE41288E7F44002CA05D /* mat_methods.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mat_methods.cpp; sourceTree = "<group>"; };
+		AA16DE47288EE543002CA05D /* point_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = point_type.h; sourceTree = "<group>"; };
+		AA16DE48288EE59F002CA05D /* point.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = point.cpp; sourceTree = "<group>"; };
+		AA16DE4A288EE979002CA05D /* point.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = point.hpp; sourceTree = "<group>"; };
+		AA16DE4B288EEA9B002CA05D /* rect_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rect_type.h; sourceTree = "<group>"; };
+		AA16DE4C288EEAD4002CA05D /* rect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rect.h; sourceTree = "<group>"; };
+		AA16DE4D288EEC83002CA05D /* rect.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = rect.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,8 @@
 				AA16DE3128899900002CA05D /* size.cpp */,
 				AA16DE39288DD2A9002CA05D /* range.cpp */,
 				AA16DE41288E7F44002CA05D /* mat_methods.cpp */,
+				AA16DE48288EE59F002CA05D /* point.cpp */,
+				AA16DE4D288EEC83002CA05D /* rect.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -132,6 +142,10 @@
 				AA16DE252886DD02002CA05D /* capi.h */,
 				AA16DE2C2886EFFC002CA05D /* mat.hpp */,
 				AA16DE3C288DD2C6002CA05D /* range_type.h */,
+				AA16DE47288EE543002CA05D /* point_type.h */,
+				AA16DE4A288EE979002CA05D /* point.hpp */,
+				AA16DE4B288EEA9B002CA05D /* rect_type.h */,
+				AA16DE4C288EEAD4002CA05D /* rect.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -193,8 +207,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA16DE49288EE59F002CA05D /* point.cpp in Sources */,
 				AA16DE40288DD555002CA05D /* test_size.cpp in Sources */,
 				AA16DE292886DD02002CA05D /* mat_constructors.cpp in Sources */,
+				AA16DE4E288EEC83002CA05D /* rect.cpp in Sources */,
 				AA16DE3B288DD2A9002CA05D /* range.cpp in Sources */,
 				AA16DE15288694E0002CA05D /* Makefile in Sources */,
 				AA16DE2B2886E885002CA05D /* test_mat.cpp in Sources */,

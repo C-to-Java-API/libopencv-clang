@@ -19,6 +19,8 @@ extern "C" {
 #include "include/mat.hpp"
 #include "include/size.hpp"
 #include "include/range.hpp"
+#include "include/point.hpp"
+#include "include/rect.hpp"
 
 #ifdef __cplusplus
 }

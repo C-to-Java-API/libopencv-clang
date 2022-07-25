@@ -55,5 +55,11 @@ bool matIsEmpty(struct Mat* src);
 size_t total(struct Mat* src);
 size_t totalWithinDimentions(struct Mat* src, int startDim, int endDim);
 int checkVector(struct Mat* src, int elemChannels, int depth, bool requireContinuous);
+void locateROI(struct Mat* src, struct Size* wholeSize, struct Point* ofs);
+struct Mat adjustROI(struct Mat* src, int dtop, int dbottom, int dleft, int dright);
+void deallocate(struct Mat* src);
+void copySize(struct Mat* src, struct Mat* dst);
+void reserve(struct Mat* src, size_t sz);
+void reserveBuffer(struct Mat* src, size_t sz);
 
 #endif /* mat_h */
