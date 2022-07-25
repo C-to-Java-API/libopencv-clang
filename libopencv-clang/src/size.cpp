@@ -14,7 +14,7 @@ int area(struct Size* s) {
     return cv::Size(s->width, s->height).area();
 }
 
-bool empty(struct Size* s) {
+bool sizeIsEmpty(struct Size* s) {
     return cv::Size(s->width, s->height).empty();
 }
 

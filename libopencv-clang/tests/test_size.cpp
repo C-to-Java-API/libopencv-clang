@@ -22,8 +22,8 @@ int main(int argc, char* argv[]) {
     };
     auto asCopyOfNonEmpty = sizeAsCopy(&nonEmpty);
     
-    assert(empty(&asCopyOfEmpty) == empty(&emptySize));
-    assert(empty(&asCopyOfNonEmpty) == empty(&nonEmpty));
+    assert(sizeIsEmpty(&asCopyOfEmpty) == sizeIsEmpty(&emptySize));
+    assert(sizeIsEmpty(&asCopyOfNonEmpty) == sizeIsEmpty(&nonEmpty));
     
     puts("Done with test [size].");
 }

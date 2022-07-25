@@ -18,9 +18,9 @@ int main(int argc, char* argv[]) {
     auto customRange = rangeStartEnd(1, 10);
     auto allRange = all();
     
-    auto sizeOfDefaultRange = size(&defaultRange);
-    auto sizeOfCustomRange = size(&customRange);
-    auto sizeOfAllRange = size(&allRange);
+    auto sizeOfDefaultRange = sizeOfRange(&defaultRange);
+    auto sizeOfCustomRange = sizeOfRange(&customRange);
+    auto sizeOfAllRange = sizeOfRange(&allRange);
     
     assert(sizeOfDefaultRange == 0);
     assert(sizeOfCustomRange == 9);

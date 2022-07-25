@@ -8,11 +8,13 @@
 #ifndef range_hpp
 #define range_hpp
 
+#include "include/range_type.h"
+
 struct Range range();
 struct Range rangeStartEnd(const int start, const int end);
 
-int size(struct Range* range);
-bool empty(struct Range* range);
+int sizeOfRange(struct Range* range);
+bool rangeIsEmpty(struct Range* range);
 struct Range all();
 
 

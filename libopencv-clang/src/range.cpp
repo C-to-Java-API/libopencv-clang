@@ -31,11 +31,11 @@ struct Range rangeStartEnd(const int start, const int end) {
     };
 }
 
-int size(struct Range* range) {
+int sizeOfRange(struct Range* range) {
     return cv::Range(range->start, range->end).size();
 }
 
-bool empty(struct Range* range) {
+bool rangeIsEmpty(struct Range* range) {
     return cv::Range(range->start, range->end).empty();
 }
 

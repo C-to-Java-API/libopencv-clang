@@ -11,7 +11,7 @@
 #include "include/size_type.h"
 
 int area(struct Size* s);
-bool empty(struct Size* s);
+bool sizeIsEmpty(struct Size* s);
 double aspectRatio(struct Size* s);
 
 struct Size size();

@@ -18,6 +18,7 @@ extern "C" {
 // C ports
 #include "include/mat.hpp"
 #include "include/size.hpp"
+#include "include/range.hpp"
 
 #ifdef __cplusplus
 }

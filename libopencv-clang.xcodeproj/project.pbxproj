@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		AA16DE15288694E0002CA05D /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE14288694E0002CA05D /* Makefile */; };
 		AA16DE282886DD02002CA05D /* export.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE262886DD02002CA05D /* export.cpp */; };
-		AA16DE292886DD02002CA05D /* mat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE272886DD02002CA05D /* mat.cpp */; };
+		AA16DE292886DD02002CA05D /* mat_constructors.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE272886DD02002CA05D /* mat_constructors.cpp */; };
 		AA16DE2B2886E885002CA05D /* test_mat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE2A2886E885002CA05D /* test_mat.cpp */; };
 		AA16DE3328899900002CA05D /* size.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE3128899900002CA05D /* size.cpp */; };
 		AA16DE3B288DD2A9002CA05D /* range.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE39288DD2A9002CA05D /* range.cpp */; };
 		AA16DE3E288DD541002CA05D /* test_range.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE3D288DD541002CA05D /* test_range.cpp */; };
 		AA16DE40288DD555002CA05D /* test_size.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE3F288DD555002CA05D /* test_size.cpp */; };
+		AA16DE42288E7F44002CA05D /* mat_methods.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AA16DE41288E7F44002CA05D /* mat_methods.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,7 +41,7 @@
 		AA16DE242886DD02002CA05D /* export.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = export.hpp; sourceTree = "<group>"; };
 		AA16DE252886DD02002CA05D /* capi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = capi.h; sourceTree = "<group>"; };
 		AA16DE262886DD02002CA05D /* export.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = export.cpp; sourceTree = "<group>"; };
-		AA16DE272886DD02002CA05D /* mat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mat.cpp; sourceTree = "<group>"; };
+		AA16DE272886DD02002CA05D /* mat_constructors.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mat_constructors.cpp; sourceTree = "<group>"; };
 		AA16DE2A2886E885002CA05D /* test_mat.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test_mat.cpp; sourceTree = "<group>"; };
 		AA16DE2C2886EFFC002CA05D /* mat.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mat.hpp; sourceTree = "<group>"; };
 		AA16DE2F288740BE002CA05D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -52,6 +53,7 @@
 		AA16DE3C288DD2C6002CA05D /* range_type.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = range_type.h; sourceTree = "<group>"; };
 		AA16DE3D288DD541002CA05D /* test_range.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test_range.cpp; sourceTree = "<group>"; };
 		AA16DE3F288DD555002CA05D /* test_size.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test_size.cpp; sourceTree = "<group>"; };
+		AA16DE41288E7F44002CA05D /* mat_methods.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mat_methods.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,9 +113,10 @@
 			children = (
 				AA16DE212886DD02002CA05D /* include */,
 				AA16DE262886DD02002CA05D /* export.cpp */,
-				AA16DE272886DD02002CA05D /* mat.cpp */,
+				AA16DE272886DD02002CA05D /* mat_constructors.cpp */,
 				AA16DE3128899900002CA05D /* size.cpp */,
 				AA16DE39288DD2A9002CA05D /* range.cpp */,
+				AA16DE41288E7F44002CA05D /* mat_methods.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -191,10 +194,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA16DE40288DD555002CA05D /* test_size.cpp in Sources */,
-				AA16DE292886DD02002CA05D /* mat.cpp in Sources */,
+				AA16DE292886DD02002CA05D /* mat_constructors.cpp in Sources */,
 				AA16DE3B288DD2A9002CA05D /* range.cpp in Sources */,
 				AA16DE15288694E0002CA05D /* Makefile in Sources */,
 				AA16DE2B2886E885002CA05D /* test_mat.cpp in Sources */,
+				AA16DE42288E7F44002CA05D /* mat_methods.cpp in Sources */,
 				AA16DE3328899900002CA05D /* size.cpp in Sources */,
 				AA16DE282886DD02002CA05D /* export.cpp in Sources */,
 				AA16DE3E288DD541002CA05D /* test_range.cpp in Sources */,
