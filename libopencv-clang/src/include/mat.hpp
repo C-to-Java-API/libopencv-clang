@@ -10,6 +10,8 @@
 
 #include "include/mat_type.h"
 #include "include/range_type.h"
+#include "include/input_array_type.h"
+#include "include/output_array_type.h"
 
 struct Mat mat();
 struct Mat matAsCopy(const struct Mat* src);
@@ -40,7 +42,7 @@ void createFromColsRowsType(struct Mat* src, struct Mat* dst, int rows, int cols
 void createFromSizeAndType(struct Mat* src, struct Mat* dst, struct Size* size, int type);
 void createAsNdimentionType(struct Mat* src, struct Mat* dst, int ndims, const int* sizes, int type);
 void addref(struct Mat* src);
-void release(struct Mat* src);
+void matRelease(struct Mat* src);
 void push_back(struct Mat* where, struct Mat* what);
 void pop_back(struct Mat* src, size_t nelems);
 bool matIsContinuous(struct Mat* src);
@@ -61,5 +63,15 @@ void deallocate(struct Mat* src);
 void copySize(struct Mat* src, struct Mat* dst);
 void reserve(struct Mat* src, size_t sz);
 void reserveBuffer(struct Mat* src, size_t sz);
+
+
+void matCopyTo(struct Mat* src, OutputArray* m );
+void copyToWithMask(struct Mat* src, OutputArray* m, struct InputArray* mask );
+void convertTo(struct Mat* src, OutputArray* m, int rtype, double alpha, double beta);
+
+struct Mat matSetTo(struct Mat* src, struct InputArray* value, struct InputArray* mask);
+
+struct Mat matCross(struct Mat* src, struct InputArray* m);
+double matDot(struct Mat* src, struct InputArray* m);
 
 #endif /* mat_h */

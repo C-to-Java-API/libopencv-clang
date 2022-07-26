@@ -16,30 +16,17 @@
 #include "opencv2/core/mat.hpp"
 
 
-void CV_InputArrayToInputArray(struct InputArray* dst, cv::InputArray& src) {
-    auto s = (Size) {
-        .width = src.getSz().width,
-        .height = src.getSz().height,
-    };
-    auto tmp = (InputArray) {
-        .obj = src.getObj(),
-        .flags = src.getFlags(),
-        .sz = &s,
-    };
-    dst = &tmp;
-}
-
 struct InputArray inputArray() {
     cv::InputArray cv_ir = cv::_InputArray();
     struct InputArray dst;
-    CV_InputArrayToInputArray(&dst, cv_ir);
+    CV_InputArrayToInputArray(cv_ir, &dst);
     return dst;
 }
 
 struct InputArray inputArrayWithArgs(int _flags, void* _obj) {
     cv::InputArray cv_ir = cv::_InputArray(_flags, _obj);
     struct InputArray dst;
-    CV_InputArrayToInputArray(&dst, cv_ir);
+    CV_InputArrayToInputArray(cv_ir, &dst);
     return dst;
 }
 
@@ -48,7 +35,7 @@ struct InputArray inputArrayFromMat(struct Mat* src) {
     matToCV_Mat(*src, m);
     cv::InputArray cv_ir = cv::_InputArray(m);
     struct InputArray dst;
-    CV_InputArrayToInputArray(&dst, cv_ir);
+    CV_InputArrayToInputArray(cv_ir, &dst);
     return dst;
 }
 
@@ -62,7 +49,7 @@ struct InputArray inputArrayFromMats(struct Mat* srcs[]) {
     }
     cv::InputArray cv_ir = cv::_InputArray(vt);
     struct InputArray dst;
-    CV_InputArrayToInputArray(&dst, cv_ir);
+    CV_InputArrayToInputArray(cv_ir, &dst);
     return dst;
 }
 
@@ -71,14 +58,14 @@ struct InputArray inputArrayFromBool(bool* arr[]) {
     std::vector<bool> src(*arr, *arr + numberOfElements);
     cv::InputArray cv_ir = cv::_InputArray(src);
     struct InputArray dst;
-    CV_InputArrayToInputArray(&dst, cv_ir);
+    CV_InputArrayToInputArray(cv_ir, &dst);
     return dst;
 }
 
 struct InputArray inputArrayFromDouble(const double* val) {
     cv::InputArray cv_ir = cv::_InputArray(*val);
     struct InputArray dst;
-    CV_InputArrayToInputArray(&dst, cv_ir);
+    CV_InputArrayToInputArray(cv_ir, &dst);
     return dst;
 }
 

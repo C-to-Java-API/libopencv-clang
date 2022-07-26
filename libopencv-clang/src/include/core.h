@@ -22,6 +22,7 @@ extern "C" {
 #include "include/point.hpp"
 #include "include/rect.hpp"
 #include "include/input_array.hpp"
+#include "include/output_array.hpp"
 
 #ifdef __cplusplus
 }

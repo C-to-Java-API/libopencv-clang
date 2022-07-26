@@ -9,6 +9,9 @@
 #include "include/size_type.h"
 #include "include/point_type.h"
 #include "include/range_type.h"
+#include "include/input_array_type.h"
+#include "include/output_array_type.h"
+
 #include "include/export.hpp"
 
 #include "opencv2/core/mat.hpp"
@@ -153,11 +156,13 @@ void addref(struct Mat* src) {
     _voidFunction(src, fn);
 }
 
-void release(struct Mat* src) {
+void matRelease(struct Mat* src) {
     std::function<void(cv::Mat)> fn = [&](cv::Mat m) {
         m.release();
     };
     _voidFunction(src, fn);
+    auto m = cv::Mat();
+    CV_MatToMat(m, *src);
 }
 
 void push_back(struct Mat* where, struct Mat* what) {
@@ -282,6 +287,7 @@ void deallocate(struct Mat* src) {
         m.deallocate();
     };
     _voidFunction(src, fn);
+    src = NULL;
 }
 
 void copySize(struct Mat* src, struct Mat* dst) {
@@ -305,4 +311,55 @@ void reserveBuffer(struct Mat* src, size_t sz) {
         m.reserveBuffer(sz);
     };
     _voidFunction(src, fn);
+}
+
+void matCopyTo(struct Mat* src, OutputArray* m) {
+    cv::Mat cv_m;
+    matToCV_Mat(*src, cv_m);
+    cv::OutputArray cv_oa = cv::_OutputArray();
+    cv_m.copyTo(cv_oa);
+    CV_OutputArrayToOutputArray(cv_oa, m);
+}
+
+void copyToWithMask(struct Mat* src, OutputArray* m, struct InputArray* mask) {
+    cv::Mat cv_m;
+    matToCV_Mat(*src, cv_m);
+    cv::OutputArray cv_oa = cv::_OutputArray();
+    cv::OutputArray cv_mask = cv::_OutputArray(mask->flags, mask->obj);
+    cv_m.copyTo(cv_oa, cv_mask);
+    CV_OutputArrayToOutputArray(cv_oa, m);
+}
+
+void convertTo(struct Mat* src, OutputArray* m, int rtype, double alpha, double beta) {
+    cv::Mat cv_m;
+    matToCV_Mat(*src, cv_m);
+    cv::OutputArray cv_oa = cv::_OutputArray(m->flags, m->obj);
+    cv_m.convertTo(cv_oa, rtype, alpha, beta);
+    CV_OutputArrayToOutputArray(cv_oa, m);
+}
+
+struct Mat matSetTo(struct Mat* src, struct InputArray* value, struct InputArray* mask) {
+    cv::Mat cv_m;
+    matToCV_Mat(*src, cv_m);
+    cv::InputArray cv_ir = cv::_InputArray(value->flags, value->obj);
+    cv::InputArray cv_mask = cv::_InputArray(mask->flags, mask->obj);
+    cv_m.setTo(cv_ir, cv_mask);
+    CV_MatToMat(cv_m, *src);
+    return *src;
+}
+
+struct Mat matCross(struct Mat* src, struct InputArray* m) {
+    cv::Mat cv_m;
+    matToCV_Mat(*src, cv_m);
+    cv::InputArray cv_ir = cv::_InputArray(m->flags, m->obj);
+    cv_m = cv_m.cross(cv_ir);
+    CV_MatToMat(cv_m, *src);
+    return *src;
+}
+
+double matDot(struct Mat* src, struct InputArray* m) {
+    cv::Mat cv_m;
+    matToCV_Mat(*src, cv_m);
+    cv::InputArray cv_ir = cv::_InputArray(m->flags, m->obj);
+    return cv_m.dot(cv_ir);
 }

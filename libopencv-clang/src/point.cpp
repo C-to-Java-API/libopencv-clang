@@ -43,19 +43,19 @@ struct Point pointFromSize(struct Size* s) {
     };
 }
 
-long dot(struct Point* src, struct Point* prod) {
+long pointDot(struct Point* src, struct Point* prod) {
     auto p_src = cv::Point(src->x, src->y);
     auto p_prod = cv::Point(prod->x, prod->y);
     return p_src.dot(p_prod);
 }
 
-double ddot(struct Point* src, struct Point* prod) {
+double pointDdot(struct Point* src, struct Point* prod) {
     auto p_src = cv::Point(src->x, src->y);
     auto p_prod = cv::Point(prod->x, prod->y);
     return p_src.ddot(p_prod);
 }
 
-double cross(struct Point* src, struct Point* prod) {
+double pointCross(struct Point* src, struct Point* prod) {
     auto p_src = cv::Point(src->x, src->y);
     auto p_prod = cv::Point(prod->x, prod->y);
     return p_src.cross(p_prod);
