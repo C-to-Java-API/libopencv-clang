@@ -58,10 +58,10 @@ stdlib-dump:
 	jextract --source -t clang.stdlib -I $(CSTDLIB_INCLUDE_DIR) --dump-includes $(dumpfile) $(CSTDLIB_INCLUDE_DIR)/stdlib.h
 
 libopencv-dump:
-	$(MAKE) libopencv-src package=dummy args='--dump-includes $(dumpfile)'
+	$(MAKE) libopencv-src package=core args='--dump-includes $(dumpfile)'
 
 libopencv-src:
-	jextract --source -t clang.opencv.$(package) -I $(CSTDLIB_INCLUDE_DIR) -I $(PROJECT_SRC_DIR) $(OPENCV_INCLUDES) --header-class-name $(package) --output $(JAVA_SOURCES_DIR) $(args) $(PROJECT_INCLUDE_DIR)/capi.h
+	jextract --source -t clang.opencv.$(package) -I $(CSTDLIB_INCLUDE_DIR) -I $(PROJECT_SRC_DIR) $(OPENCV_INCLUDES) --header-class-name $(package) --output $(JAVA_SOURCES_DIR) $(args) $(PROJECT_INCLUDE_DIR)/$(package).h
 
 java-src:
 	$(MAKE) stdlib-dump dumpfile=stdlib_dump.txt
@@ -100,3 +100,6 @@ test: clean lib
 	$(MAKE) test-suite suite=$(PROJECT_TEST_DIR)/test_mat.cpp
 	$(MAKE) test-suite suite=$(PROJECT_TEST_DIR)/test_size.cpp
 	$(MAKE) test-suite suite=$(PROJECT_TEST_DIR)/test_range.cpp
+	$(MAKE) test-suite suite=$(PROJECT_TEST_DIR)/test_point.cpp
+	$(MAKE) test-suite suite=$(PROJECT_TEST_DIR)/test_rect.cpp
+	$(MAKE) test-suite suite=$(PROJECT_TEST_DIR)/test_input_array.cpp

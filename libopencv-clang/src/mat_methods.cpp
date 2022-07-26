@@ -177,14 +177,14 @@ void pop_back(struct Mat* src, size_t nelems) {
     _voidFunction(src, fn);
 }
 
-bool isContinuous(struct Mat* src) {
+bool matIsContinuous(struct Mat* src) {
     std::function<bool(cv::Mat)> fn = [&](cv::Mat m) {
         return m.isContinuous();
     };
     return _boolFunction(src, fn);
 }
 
-bool isSubmatrix(struct Mat* src) {
+bool matIsSubmatrix(struct Mat* src) {
     std::function<bool(cv::Mat)> fn = [&](cv::Mat m) {
         return m.isSubmatrix();
     };
@@ -205,21 +205,21 @@ size_t elemSize1(struct Mat* src) {
     return _sizeTFunction(src, fn);
 }
 
-int type(struct Mat* src) {
+int matType(struct Mat* src) {
     std::function<int(cv::Mat)> fn = [&](cv::Mat m) {
         return m.type();
     };
     return _intFunction(src, fn);
 }
 
-int depth(struct Mat* src) {
+int matDepth(struct Mat* src) {
     std::function<int(cv::Mat)> fn = [&](cv::Mat m) {
         return m.depth();
     };
     return _intFunction(src, fn);
 }
 
-int channels(struct Mat* src) {
+int matChannels(struct Mat* src) {
     std::function<int(cv::Mat)> fn = [&](cv::Mat m) {
         return m.channels();
     };
@@ -240,7 +240,7 @@ bool matIsEmpty(struct Mat* src) {
     return _boolFunction(src, fn);
 }
 
-size_t total(struct Mat* src) {
+size_t matTotal(struct Mat* src) {
     std::function<size_t(cv::Mat)> fn = [&](cv::Mat m) {
         return m.total();
     };

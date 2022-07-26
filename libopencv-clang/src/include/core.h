@@ -21,6 +21,7 @@ extern "C" {
 #include "include/range.hpp"
 #include "include/point.hpp"
 #include "include/rect.hpp"
+#include "include/input_array.hpp"
 
 #ifdef __cplusplus
 }
